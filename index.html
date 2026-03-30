@@ -128,10 +128,85 @@ nav{position:fixed;top:3px;left:0;right:0;z-index:999;height:var(--nav-h);displa
 .planet-house{display:inline-block;margin-top:8px;padding:2px 8px;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);border-radius:20px;font-size:10px;color:var(--gold);letter-spacing:1px;}
 
 /* ELEMENT TABLE */
-.elem-table{width:100%;border-collapse:collapse;margin-bottom:24px;}
-.elem-table th{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);padding:10px 14px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.1);text-align:left;}
-.elem-table td{font-size:12px;color:var(--cream-d);padding:10px 14px;border:1px solid rgba(201,168,76,0.06);vertical-align:top;}
-.elem-table tr:nth-child(even) td{background:rgba(27,42,74,0.4);}
+/* SIGNATURE CARDS — replaces tables */
+.sig-section { margin-bottom: 40px; }
+.sig-section-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 18px; display: flex; align-items: center; gap: 12px;
+}
+.sig-section-label::after {
+  content: ""; flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(201,168,76,0.3), transparent);
+}
+.sig-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(260px,100%),1fr));
+  gap: 12px;
+}
+.sig-card {
+  background: rgba(17,34,64,0.7);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 14px;
+  padding: clamp(16px,2.5vw,22px);
+  display: flex; flex-direction: column; gap: 10px;
+  transition: border-color 0.3s, transform 0.2s;
+}
+.sig-card:hover { border-color: rgba(201,168,76,0.25); transform: translateY(-2px); }
+.sig-card-top {
+  display: flex; align-items: center; gap: 14px;
+}
+.sig-badge {
+  min-width: 52px; height: 52px;
+  border-radius: 12px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.sig-badge-num {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 22px; font-weight: 500; color: var(--gold); line-height: 1;
+}
+.sig-badge-word {
+  font-size: 8px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--grey-l); margin-top: 2px;
+}
+.sig-card-header {}
+.sig-card-name {
+  font-size: 14px; font-weight: 600; color: var(--cream); margin-bottom: 2px;
+}
+.sig-card-planets {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px; color: var(--gold); opacity: 0.7; line-height: 1.4;
+}
+.sig-card-desc {
+  font-size: 12px; color: var(--grey-l); line-height: 1.65;
+  padding-top: 10px;
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+/* Colour tints per element/modality */
+.sig-earth { background: rgba(99,153,34,0.12); border: 1px solid rgba(99,153,34,0.2); }
+.sig-fire  { background: rgba(226,75,74,0.12); border: 1px solid rgba(226,75,74,0.2); }
+.sig-air   { background: rgba(55,138,221,0.12); border: 1px solid rgba(55,138,221,0.2); }
+.sig-water { background: rgba(55,138,221,0.1);  border: 1px solid rgba(55,138,221,0.15); }
+.sig-fixed   { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); }
+.sig-cardinal{ background: rgba(186,117,23,0.1);  border: 1px solid rgba(186,117,23,0.2); }
+.sig-mutable { background: rgba(138,155,176,0.1); border: 1px solid rgba(138,155,176,0.2); }
+.sig-earth .sig-badge-num   { color: #9ACA5C; }
+.sig-fire .sig-badge-num    { color: #F09595; }
+.sig-air .sig-badge-num     { color: #7BB8F0; }
+.sig-water .sig-badge-num   { color: #7BB8F0; }
+.sig-fixed .sig-badge-num   { color: var(--gold); }
+.sig-cardinal .sig-badge-num{ color: #EF9F27; }
+.sig-mutable .sig-badge-num { color: var(--grey-l); }
+/* dominant label pill */
+.sig-dominant {
+  display: inline-block; padding: 2px 8px; border-radius: 10px;
+  font-size: 9px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; margin-left: 6px; vertical-align: middle;
+  background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gold);
+}
 
 /* LIFE PATH */
 .path-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px;}
@@ -657,22 +732,116 @@ footer{border-top:1px solid rgba(201,168,76,0.1);padding:clamp(26px,4vw,48px) 40
     <p>"A disciplined visionary, born to transform resources — other people's, institutions', and ultimately the world's — through precision, leverage, and an uncompromising long-term view. Not built for small. Built for legacy."</p>
   </div>
 
-  <!-- ELEMENT & MODALITY SUMMARY -->
-  <div class="reveal" style="margin-bottom:32px;">
-    <div class="sec-label" style="margin-bottom:10px;">Chart Signature — Elements &amp; Modalities</div>
-    <table class="elem-table">
-      <tr><th>Element</th><th>Count</th><th>Dominant Placements</th><th>What It Means for You</th></tr>
-      <tr><td>Earth ♁</td><td style="color:var(--gold);font-weight:600;">10</td><td>Moon, Uranus, Neptune, Saturn, Jupiter, Mercury, Venus, ASC, Fortune, Vertex</td><td>You are overwhelmingly Earth-dominant. You think in tangible outcomes, build in structures, and measure everything in real-world results. This is not someone who floats in ideals — you need to see, touch, and own what you create.</td></tr>
-      <tr><td>Fire 🔥</td><td style="color:var(--gold);font-weight:600;">3</td><td>Sun, Mars, Lilith</td><td>The fire is concentrated in your Sun and Mars — your identity and drive. Small in count but explosive in impact. Your ambition burns hot precisely because it is focused, not scattered.</td></tr>
-      <tr><td>Air 💨</td><td style="color:var(--gold);font-weight:600;">2</td><td>MC, Node</td><td>Air governs your public reputation and your karmic direction — how the world sees you and where your destiny pulls.</td></tr>
-      <tr><td>Water 💧</td><td style="color:var(--gold);font-weight:600;">2</td><td>Chiron, Pluto</td><td>Emotional depth is present but private. You feel deeply — you simply do not display it. The water operates underground, which makes your emotional intelligence a quiet weapon rather than a visible trait.</td></tr>
-    </table>
-    <table class="elem-table">
-      <tr><th>Modality</th><th>Count</th><th>What It Means</th></tr>
-      <tr><td>Fixed ♦</td><td style="color:var(--gold);font-weight:600;">8</td><td>You are a Fixed-dominant chart. You do not pivot easily — when you commit to something, you build through it. This gives you extraordinary follow-through but makes the 2027 test period more intense. Fixed signs do not abandon course lightly, and that is both your greatest strength and your greatest danger in a year of pressure.</td></tr>
-      <tr><td>Cardinal ▲</td><td style="color:var(--gold);font-weight:600;">5</td><td>Enough cardinal energy to initiate and lead. You can start things. But Fixed energy is what finishes them.</td></tr>
-      <tr><td>Mutable ≈</td><td style="color:var(--gold);font-weight:600;">4</td><td>Some adaptability — enough to navigate foreign environments like Georgia. Not so much that you lose direction when things shift.</td></tr>
-    </table>
+  <!-- ELEMENT & MODALITY SIGNATURE -->
+  <div class="reveal sig-section" style="margin-bottom:40px;">
+
+    <div class="sig-section-label">Chart Signature — Elements</div>
+    <div class="sig-grid" style="margin-bottom:20px;">
+
+      <div class="sig-card">
+        <div class="sig-card-top">
+          <div class="sig-badge sig-earth">
+            <div class="sig-badge-num">10</div>
+            <div class="sig-badge-word">planets</div>
+          </div>
+          <div class="sig-card-header">
+            <div class="sig-card-name">Earth ♁ <span class="sig-dominant">Dominant</span></div>
+            <div class="sig-card-planets">Moon · Uranus · Neptune · Saturn<br>Jupiter · Mercury · Venus · ASC · Fortune · Vertex</div>
+          </div>
+        </div>
+        <div class="sig-card-desc">You are overwhelmingly Earth-dominant. You think in tangible outcomes, build in structures, and measure everything in real-world results. This is not someone who floats in ideals — you need to see, touch, and own what you create. The Falcon 10X is Earth energy made literal.</div>
+      </div>
+
+      <div class="sig-card">
+        <div class="sig-card-top">
+          <div class="sig-badge sig-fire">
+            <div class="sig-badge-num">3</div>
+            <div class="sig-badge-word">planets</div>
+          </div>
+          <div class="sig-card-header">
+            <div class="sig-card-name">Fire 🔥</div>
+            <div class="sig-card-planets">Sun · Mars · Lilith</div>
+          </div>
+        </div>
+        <div class="sig-card-desc">The fire is concentrated entirely in your Sun and Mars — your identity and drive. Small in count but explosive in impact. Your ambition burns hot precisely because it is focused, not scattered across multiple planets.</div>
+      </div>
+
+      <div class="sig-card">
+        <div class="sig-card-top">
+          <div class="sig-badge sig-air">
+            <div class="sig-badge-num">2</div>
+            <div class="sig-badge-word">planets</div>
+          </div>
+          <div class="sig-card-header">
+            <div class="sig-card-name">Air 💨</div>
+            <div class="sig-card-planets">MC · Node</div>
+          </div>
+        </div>
+        <div class="sig-card-desc">Air governs your public reputation and your karmic direction — how the world sees you and where your destiny pulls. Scorpio MC means you will be known through power, research, and transformation.</div>
+      </div>
+
+      <div class="sig-card">
+        <div class="sig-card-top">
+          <div class="sig-badge sig-water">
+            <div class="sig-badge-num">2</div>
+            <div class="sig-badge-word">planets</div>
+          </div>
+          <div class="sig-card-header">
+            <div class="sig-card-name">Water 💧</div>
+            <div class="sig-card-planets">Chiron · Pluto</div>
+          </div>
+        </div>
+        <div class="sig-card-desc">Emotional depth is present but private. You feel deeply — you simply do not display it. The water operates underground, which makes your emotional intelligence a quiet weapon rather than a visible trait.</div>
+      </div>
+
+    </div>
+
+    <div class="sig-section-label">Chart Signature — Modalities</div>
+    <div class="sig-grid">
+
+      <div class="sig-card">
+        <div class="sig-card-top">
+          <div class="sig-badge sig-fixed">
+            <div class="sig-badge-num">8</div>
+            <div class="sig-badge-word">planets</div>
+          </div>
+          <div class="sig-card-header">
+            <div class="sig-card-name">Fixed ♦ <span class="sig-dominant">Dominant</span></div>
+            <div class="sig-card-planets">Sun · Moon · Mars · Saturn · Jupiter<br>Uranus · Neptune · Pluto</div>
+          </div>
+        </div>
+        <div class="sig-card-desc">You are Fixed-dominant. You do not pivot easily — when you commit to something, you build through it. This gives you extraordinary follow-through but makes the 2027 test period more intense. Fixed signs do not abandon course lightly, and that is both your greatest strength and your greatest danger in a year of pressure.</div>
+      </div>
+
+      <div class="sig-card">
+        <div class="sig-card-top">
+          <div class="sig-badge sig-cardinal">
+            <div class="sig-badge-num">5</div>
+            <div class="sig-badge-word">planets</div>
+          </div>
+          <div class="sig-card-header">
+            <div class="sig-card-name">Cardinal ▲</div>
+            <div class="sig-card-planets">ASC · MC · Venus · Mercury · Moon</div>
+          </div>
+        </div>
+        <div class="sig-card-desc">Enough cardinal energy to initiate and lead. You can start things, enter new environments, and command first impressions. But Fixed energy is what finishes them — the drive to completion comes from deep within, not from external momentum.</div>
+      </div>
+
+      <div class="sig-card">
+        <div class="sig-card-top">
+          <div class="sig-badge sig-mutable">
+            <div class="sig-badge-num">4</div>
+            <div class="sig-badge-word">planets</div>
+          </div>
+          <div class="sig-card-header">
+            <div class="sig-card-name">Mutable ≈</div>
+            <div class="sig-card-planets">Mercury · Venus · Jupiter · Saturn</div>
+          </div>
+        </div>
+        <div class="sig-card-desc">Some adaptability — enough to navigate foreign environments like Georgia and build cross-border businesses. Not so much that you lose direction when things shift. You bend without breaking.</div>
+      </div>
+
+    </div>
   </div>
 
   <div class="planet-grid reveal">
