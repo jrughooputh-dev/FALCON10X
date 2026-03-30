@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Falcon 10X Mission — Strategic Roadmap 2026–2030</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold:        #C9A84C;
+    --gold-light:  #E8D5A3;
+    --gold-dim:    #8B6914;
+    --gold-pale:   #F5EDD0;
+    --navy:        #0A0E1A;
+    --navy-mid:    #0D1B2A;
+    --navy-light:  #112240;
+    --navy-card:   #1B2A4A;
+    --navy-hover:  #1E3158;
+    --cream:       #F5F0E8;
+    --cream-dim:   #D4C9A8;
+    --red:         #E24B4A;
+    --red-soft:    #FCEBEB;
+    --green:       #639922;
+    --green-soft:  #EAF3DE;
+    --blue:        #378ADD;
+    --blue-soft:   #E6F1FB;
+    --amber:       #BA7517;
+    --amber-soft:  #FAEEDA;
+    --grey:        #4A5568;
+    --grey-light:  #8A9BB0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Syne', sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── GOLD TOP BAR ── */
+  .top-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-light), var(--gold));
+    z-index: 1000;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .reading-bar {
+    position: fixed;
+    top: 3px; left: 0;
+    height: 2px;
+    background: var(--gold);
+    width: 0%;
+    z-index: 1000;
+    transition: width 0.1s;
+    opacity: 0.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 3px;
+    left: 0; right: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10, 14, 26, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--grey-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-countdown {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    opacity: 0.8;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 120px 40px 80px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(55,138,221,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 30% at 80% 70%, rgba(201,168,76,0.03) 0%, transparent 50%);
+  }
+
+  /* Star field */
+  .stars {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .star {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    animation: twinkle var(--d, 3s) var(--delay, 0s) ease-in-out infinite alternate;
+  }
+
+  @keyframes twinkle {
+    from { opacity: 0.1; transform: scale(1); }
+    to   { opacity: 0.7; transform: scale(1.5); }
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 10vw, 100px);
+    font-weight: 300;
+    line-height: 0.95;
+    color: var(--cream);
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-title .small-line {
+    font-size: clamp(28px, 5vw, 52px);
+    display: block;
+    color: var(--cream-dim);
+    margin-top: 8px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+    color: var(--grey-light);
+    margin-top: 28px;
+    letter-spacing: 0.5px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-meta-item {
+    text-align: center;
+  }
+
+  .hero-meta-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--gold);
+    display: block;
+  }
+
+  .hero-meta-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--grey-light);
+    margin-top: 2px;
+    display: block;
+  }
+
+  .hero-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(201,168,76,0.2);
+    align-self: center;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards;
+  }
+
+  .scroll-cue span {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--grey-light);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(0.7); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 100px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  .section-intro {
+    font-size: 14px;
+    color: var(--grey-light);
+    max-width: 600px;
+    line-height: 1.8;
+    margin-bottom: 60px;
+  }
+
+  .gold-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 40px;
+  }
+
+  /* ── COUNTDOWN SECTION ── */
+  .countdown-section {
+    background: linear-gradient(135deg, rgba(201,168,76,0.05), rgba(17,34,64,0.8));
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 20px;
+    padding: 48px;
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .countdown-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .countdown-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--cream-dim);
+    margin-bottom: 32px;
+    letter-spacing: 2px;
+  }
+
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .cd-unit {
+    min-width: 80px;
+  }
+
+  .cd-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 48px;
+    font-weight: 400;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+
+  .cd-sep {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 48px;
+    color: rgba(201,168,76,0.3);
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+
+  .cd-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--grey-light);
+    margin-top: 6px;
+    display: block;
+  }
+
+  /* ── CHART SECTION ── */
+  .chart-container {
+    background: rgba(17, 34, 64, 0.6);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .chart-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .chart-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 32px;
+  }
+
+  .planet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .planet-card {
+    background: rgba(27, 42, 74, 0.8);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.3s, transform 0.2s;
+    cursor: default;
+  }
+
+  .planet-card:hover {
+    border-color: rgba(201,168,76,0.3);
+    transform: translateY(-2px);
+  }
+
+  .planet-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .planet-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .planet-icon.sun    { background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); }
+  .planet-icon.moon   { background: rgba(55,138,221,0.15); border: 1px solid rgba(55,138,221,0.3); }
+  .planet-icon.mars   { background: rgba(226,75,74,0.15);  border: 1px solid rgba(226,75,74,0.3); }
+  .planet-icon.merc   { background: rgba(99,153,34,0.15);  border: 1px solid rgba(99,153,34,0.3); }
+  .planet-icon.venus  { background: rgba(186,117,23,0.15); border: 1px solid rgba(186,117,23,0.3); }
+  .planet-icon.jup    { background: rgba(201,168,76,0.2);  border: 1px solid rgba(201,168,76,0.4); }
+  .planet-icon.sat    { background: rgba(138,155,176,0.15);border: 1px solid rgba(138,155,176,0.3); }
+  .planet-icon.uran   { background: rgba(55,138,221,0.15); border: 1px solid rgba(55,138,221,0.3); }
+
+  .planet-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 0.5px;
+  }
+
+  .planet-pos {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    margin-top: 1px;
+  }
+
+  .planet-desc {
+    font-size: 12px;
+    color: var(--grey-light);
+    line-height: 1.6;
+  }
+
+  .planet-house {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 2px 8px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 20px;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  /* ── MISSION CALLOUT ── */
+  .mission-callout {
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(139,105,20,0.05));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 16px 16px 0;
+    padding: 32px 40px;
+    margin: 40px 0;
+    position: relative;
+  }
+
+  .mission-callout p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    line-height: 1.6;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline-wrap {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .timeline-spine {
+    position: absolute;
+    left: 16px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), rgba(201,168,76,0.1));
+  }
+
+  .tl-entry {
+    position: relative;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+
+  .tl-entry.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .tl-node {
+    position: absolute;
+    left: -47px;
+    top: 20px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: var(--navy);
+    z-index: 1;
+  }
+
+  .tl-node.active { background: var(--gold); }
+  .tl-node.test   { border-color: var(--red); }
+  .tl-node.accel  { border-color: var(--amber); background: var(--amber); }
+  .tl-node.arrive { background: var(--gold); box-shadow: 0 0 20px rgba(201,168,76,0.5); }
+
+  .tl-card {
+    background: rgba(17, 34, 64, 0.7);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 16px;
+    padding: 28px 32px;
+    cursor: pointer;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .tl-card:hover {
+    border-color: rgba(201,168,76,0.25);
+    background: rgba(27, 42, 74, 0.8);
+  }
+
+  .tl-card.open {
+    border-color: rgba(201,168,76,0.35);
+    background: rgba(27, 42, 74, 0.9);
+  }
+
+  .tl-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .tl-year-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gold);
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+  }
+
+  .tl-year-badge.test   { color: var(--red);   background: rgba(226,75,74,0.1);  border-color: rgba(226,75,74,0.2); }
+  .tl-year-badge.accel  { color: #EF9F27;       background: rgba(239,159,39,0.1); border-color: rgba(239,159,39,0.2); }
+  .tl-year-badge.arrive { color: var(--gold);   background: rgba(201,168,76,0.15); border-color: var(--gold); }
+
+  .tl-toggle {
+    font-size: 18px;
+    color: var(--grey-light);
+    transition: transform 0.3s;
+    line-height: 1;
+  }
+
+  .tl-card.open .tl-toggle { transform: rotate(45deg); color: var(--gold); }
+
+  .tl-title-row {
+    margin-top: 12px;
+  }
+
+  .tl-main-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.2;
+  }
+
+  .tl-theme {
+    font-size: 12px;
+    color: var(--grey-light);
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  .tl-body {
+    display: none;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .tl-card.open .tl-body { display: block; }
+
+  .tl-points {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+
+  .tl-points li {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: var(--cream-dim);
+    line-height: 1.6;
+  }
+
+  .tl-points li::before {
+    content: '—';
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .tl-risk-box {
+    background: rgba(226,75,74,0.06);
+    border: 1px solid rgba(226,75,74,0.2);
+    border-left: 3px solid var(--red);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: var(--grey-light);
+  }
+
+  .tl-risk-box strong { color: var(--red); }
+
+  /* ── BUSINESSES ── */
+  .biz-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 700px) {
+    .biz-grid { grid-template-columns: 1fr; }
+    nav { padding: 12px 20px; }
+    .nav-links { display: none; }
+    section { padding: 60px 20px; }
+    .hero { padding: 100px 20px 60px; }
+    .countdown-section { padding: 28px 20px; }
+  }
+
+  .biz-card {
+    background: rgba(17, 34, 64, 0.7);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 20px;
+    padding: 32px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .biz-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(201,168,76,0.25);
+  }
+
+  .biz-tag {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .biz-tag.np { background: rgba(55,138,221,0.15); color: #7BB8F0; border: 1px solid rgba(55,138,221,0.25); }
+  .biz-tag.fm { background: rgba(99,153,34,0.15);  color: #9ACA5C; border: 1px solid rgba(99,153,34,0.25); }
+
+  .biz-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .biz-sub {
+    font-size: 12px;
+    color: var(--grey-light);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .biz-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.06);
+    font-size: 11px;
+  }
+
+  .biz-status-key { color: var(--grey-light); }
+  .biz-status-val { font-weight: 600; display: flex; align-items: center; gap: 6px; }
+
+  .status-pip {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .pip-green  { background: var(--green); }
+  .pip-amber  { background: var(--amber); }
+  .pip-red    { background: var(--red); }
+
+  .biz-actions {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .biz-action-title {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .biz-action-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: var(--cream-dim);
+    line-height: 1.5;
+  }
+
+  .biz-action-num {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .synergy-card {
+    background: linear-gradient(135deg, rgba(201,168,76,0.05), rgba(17,34,64,0.9));
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 20px;
+    padding: 32px;
+  }
+
+  .synergy-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+  }
+
+  .synergy-body {
+    font-size: 13px;
+    color: var(--grey-light);
+    line-height: 1.8;
+  }
+
+  /* ── CHECKLIST ── */
+  .checklist-group {
+    margin-bottom: 40px;
+  }
+
+  .checklist-group-title {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .checklist-group-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,168,76,0.15);
+  }
+
+  .check-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.06);
+    transition: opacity 0.2s;
+  }
+
+  .check-item.done { opacity: 0.4; }
+
+  .check-box {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid rgba(201,168,76,0.3);
+    border-radius: 5px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    background: transparent;
+  }
+
+  .check-box:hover { border-color: var(--gold); }
+  .check-box.checked { background: var(--gold); border-color: var(--gold); }
+
+  .check-box.checked::after {
+    content: '✓';
+    font-size: 11px;
+    color: var(--navy);
+    font-weight: 700;
+  }
+
+  .check-text {
+    flex: 1;
+  }
+
+  .check-label {
+    font-size: 13px;
+    color: var(--cream);
+    line-height: 1.5;
+    transition: color 0.2s;
+  }
+
+  .check-item.done .check-label {
+    text-decoration: line-through;
+    color: var(--grey);
+  }
+
+  .check-meta {
+    font-size: 11px;
+    color: var(--grey-light);
+    margin-top: 2px;
+  }
+
+  .priority-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-left: 8px;
+  }
+
+  .p-urgent { background: rgba(226,75,74,0.15);  color: #F09595;  border: 1px solid rgba(226,75,74,0.2); }
+  .p-high   { background: rgba(186,117,23,0.15); color: #EF9F27;  border: 1px solid rgba(186,117,23,0.2); }
+  .p-now    { background: rgba(99,153,34,0.15);  color: #9ACA5C;  border: 1px solid rgba(99,153,34,0.2); }
+
+  /* ── FIGURES ── */
+  .figures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .figure-card {
+    background: rgba(17, 34, 64, 0.7);
+    border: 1px solid rgba(201,168,76,0.08);
+    border-radius: 16px;
+    padding: 24px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .figure-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(201,168,76,0.2);
+  }
+
+  .figure-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .figure-sub {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--grey-light);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+
+  .figure-body {
+    font-size: 12px;
+    color: var(--cream-dim);
+    line-height: 1.7;
+  }
+
+  .figure-lesson {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201,168,76,0.06);
+    border-left: 2px solid var(--gold);
+    font-size: 11px;
+    color: var(--gold-light);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* ── PROGRESS BARS ── */
+  .progress-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  @media (max-width: 700px) {
+    .progress-grid { grid-template-columns: 1fr; }
+    .biz-grid { grid-template-columns: 1fr; }
+  }
+
+  .progress-card {
+    background: rgba(17, 34, 64, 0.7);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 16px;
+    padding: 28px;
+  }
+
+  .progress-card-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .bar-label {
+    font-size: 11px;
+    color: var(--grey-light);
+    min-width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(201,168,76,0.08);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .bar-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    min-width: 32px;
+  }
+
+  /* Income chart */
+  .income-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    height: 120px;
+    padding-top: 20px;
+  }
+
+  .income-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+  }
+
+  .income-bar {
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    transition: height 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 4px;
+  }
+
+  .income-year-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--grey-light);
+    margin-top: 8px;
+  }
+
+  /* Falcon meter */
+  .falcon-section {
+    background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(10,14,26,0.9));
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .falcon-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--cream-dim);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  .falcon-track {
+    height: 12px;
+    background: rgba(201,168,76,0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.1);
+    margin: 0 auto;
+    max-width: 600px;
+  }
+
+  .falcon-fill {
+    height: 100%;
+    border-radius: 6px;
+    background: linear-gradient(90deg, var(--green), var(--amber), var(--gold));
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+  }
+
+  .falcon-endpoints {
+    display: flex;
+    justify-content: space-between;
+    max-width: 600px;
+    margin: 8px auto 0;
+  }
+
+  .falcon-endpoint {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--grey-light);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(201,168,76,0.1);
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .footer-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--grey-light);
+    max-width: 500px;
+    margin: 0 auto 20px;
+    line-height: 1.7;
+  }
+
+  .footer-meta {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(138,155,176,0.5);
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s, transform 0.7s;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.15), transparent);
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar"></div>
+<div class="reading-bar" id="readingBar"></div>
+
+<nav>
+  <div class="nav-logo">Falcon 10X</div>
+  <ul class="nav-links">
+    <li><a href="#chart">Chart</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#businesses">Businesses</a></li>
+    <li><a href="#now">Now</a></li>
+    <li><a href="#figures">Reference</a></li>
+    <li><a href="#progress">Progress</a></li>
+  </ul>
+  <div class="nav-countdown" id="navCountdown">Loading...</div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="stars" id="stars"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Sidereal Birth Chart Analysis &amp; Strategic Roadmap</div>
+    <h1 class="hero-title">
+      <em>Falcon</em> 10X
+      <span class="small-line">Mission 2026 — 2030</span>
+    </h1>
+    <p class="hero-subtitle">
+      September 9, 2000 &nbsp;·&nbsp; 15:16 &nbsp;·&nbsp; Quatre Bornes, Mauritius<br>
+      Sidereal / Lahiri Ayanamsa 23°51' &nbsp;·&nbsp; Capricorn Rising &nbsp;·&nbsp; Leo Sun, House 8
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-val" id="heroYears">4</span>
+        <span class="hero-meta-label">Years Left</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-val" id="heroMonths">5</span>
+        <span class="hero-meta-label">Months</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-val" id="heroDays">11</span>
+        <span class="hero-meta-label">Days</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-val">GEO</span>
+        <span class="hero-meta-label">Base</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-val">2</span>
+        <span class="hero-meta-label">Businesses</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ── COUNTDOWN ── -->
+<section>
+  <div class="countdown-section reveal">
+    <div class="countdown-title">Time remaining to September 9, 2030</div>
+    <div class="countdown-grid">
+      <div class="cd-unit">
+        <span class="cd-num" id="cdY">4</span>
+        <span class="cd-label">Years</span>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <span class="cd-num" id="cdMo">5</span>
+        <span class="cd-label">Months</span>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <span class="cd-num" id="cdD">11</span>
+        <span class="cd-label">Days</span>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <span class="cd-num" id="cdH">--</span>
+        <span class="cd-label">Hours</span>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <span class="cd-num" id="cdM">--</span>
+        <span class="cd-label">Minutes</span>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <span class="cd-num" id="cdS">--</span>
+        <span class="cd-label">Seconds</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── CHART ANALYSIS ── -->
+<section id="chart">
+  <div class="reveal">
+    <div class="section-label">Part I</div>
+    <h2 class="section-title">Sidereal Chart<br><em>Analysis</em></h2>
+    <div class="gold-rule"></div>
+    <p class="section-intro">Every placement in your chart tells a single coherent story. You are built for leverage, legacy, and international operation. Here is the full decode.</p>
+  </div>
+
+  <div class="mission-callout reveal">
+    <p>"A disciplined visionary, born to transform resources — other people's, institutions', and ultimately the world's — through precision, leverage, and an uncompromising long-term view."</p>
+  </div>
+
+  <div class="chart-container reveal">
+    <div class="chart-eyebrow">Planetary Positions</div>
+    <div class="chart-heading">Key Placements</div>
+    <div class="planet-grid">
+
+      <div class="planet-card">
+        <div class="planet-header">
+          <div class="planet-icon sun">☉</div>
+          <div>
+            <div class="planet-name">Sun</div>
+            <div class="planet-pos">Leo 23°12'</div>
+          </div>
+        </div>
+        <div class="planet-desc">Your identity lives in the 8th house — the domain of other people's money, power, transformation, and hidden value. You are not the Leo who performs on stage. You are the Leo who controls what happens behind the curtain. Your purpose is mastering leverage and emerging stronger from every cycle of destruction.</div>
+        <div class="planet-house">House 8 — Power Zone</div>
+      </div>
+
+      <div class="planet-card">
+        <div class="planet-header">
+          <div class="planet-icon moon">☽</div>
+          <div>
+            <div class="planet-name">Moon</div>
+            <div class="planet-pos">Capricorn 4°25'</div>
+          </div>
+        </div>
+        <div class="planet-desc">Emotions processed privately, expressed through achievement. Emotionally self-reliant to a fault. The drive to build and become someone is not just ambition — it is a deep need for security and self-respect. Moon conjunct Ascendant means your energy shifts are readable even when you think you're hiding them.</div>
+        <div class="planet-house">House 1 — Identity</div>
+      </div>
+
+      <div class="planet-card">
+        <div class="planet-header">
+          <div class="planet-icon mars">♂</div>
+          <div>
+            <div class="planet-name">Mars</div>
+            <div class="planet-pos">Leo 1°22'</div>
+          </div>
+        </div>
+        <div class="planet-desc">A warrior's placement. You fight for legacy, not just victory. Mars and Sun both in Leo in the 8th house makes this your power zone — finance, investment, high-stakes negotiation, crisis management. You come alive under pressure. Shadow: Leo Mars can be prideful. Capricorn rising must govern this fire.</div>
+        <div class="planet-house">House 8 — Power Zone</div>
+      </div>
+
+      <div class="planet-card">
+        <div class="planet-header">
+          <div class="planet-icon merc">☿</div>
+          <div>
+            <div class="planet-name">Mercury</div>
+            <div class="planet-pos">Virgo 8°39'</div>
+          </div>
+        </div>
+        <div class="planet-desc">An extraordinarily analytical mind. You think in systems, patterns, and precision — you see what everyone else missed. In the 9th house, this is drawn to foreign cultures, higher knowledge, and international business. You think and communicate better in writing than speech. Born for research-driven cross-border strategy.</div>
+        <div class="planet-house">House 9 — International</div>
+      </div>
+
+      <div class="planet-card">
+        <div class="planet-header">
+          <div class="planet-icon venus">♀</div>
+          <div>
+            <div class="planet-name">Venus</div>
+            <div class="planet-pos">Virgo 17°34'</div>
+          </div>
+        </div>
+        <div class="planet-desc">Attracted to competence and genuine substance over flash. Love expressed through acts of service and reliability. In the 9th house, your most meaningful connections involve someone from a different cultural background. A Turkish partner found during international movement is not coincidence — it is Venus in the 9th doing exactly what it is placed to do.</div>
+        <div class="planet-house">House 9 — International</div>
+      </div>
+
+      <div class="planet-card">
+        <div class="planet-header">
+          <div class="planet-icon jup">♃</div>
+          <div>
+            <div class="planet-name">Jupiter</div>
+            <div class="planet-pos">Taurus 16°42'</div>
+          </div>
+        </div>
+        <div class="planet-desc">Expands through material mastery — wealth, land, physical assets, patient accumulation. In the 5th house, expansion comes through creative ventures and calculated speculation. Jupiter conjunct Saturn here is the delayed but massive signature — you will not get early wins, but when your moment comes, it compounds into structural, lasting wealth.</div>
+        <div class="planet-house">House 5 — Wealth Gate</div>
+      </div>
+
+      <div class="planet-card">
+        <div class="planet-header">
+          <div class="planet-icon sat">♄</div>
+          <div>
+            <div class="planet-name">Saturn</div>
+            <div class="planet-pos">Taurus 7°06'</div>
+          </div>
+        </div>
+        <div class="planet-desc">Saturn demands you earn the right to express yourself fully. Toronto was Saturn's examination hall — it tested you and you didn't break. Saturn conjunct Jupiter in Taurus in the 5th is your most powerful long-game wealth signature. The compound returns this placement promises arrive precisely because they were delayed.</div>
+        <div class="planet-house">House 5 — Wealth Gate</div>
+      </div>
+
+      <div class="planet-card">
+        <div class="planet-header">
+          <div class="planet-icon uran">♅</div>
+          <div>
+            <div class="planet-name">Uranus + Neptune</div>
+            <div class="planet-pos">Capricorn 23°53' / 10°16'</div>
+          </div>
+        </div>
+        <div class="planet-desc">1st house stellium with Moon. You are a disruptor wearing a suit. You look conventional but your mind operates outside every established frame. Neptune adds visionary idealism to Capricorn structure — you are not just building for practical reasons, you are building toward a vision. This stellium is built to create institutions, not just companies.</div>
+        <div class="planet-house">House 1 — Identity Stellium</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── TIMELINE ── -->
+<section id="timeline">
+  <div class="reveal">
+    <div class="section-label">Part II</div>
+    <h2 class="section-title">Year by Year<br><em>Roadmap</em></h2>
+    <div class="gold-rule"></div>
+    <p class="section-intro">From zero income in March 2026 to the Falcon 10X on September 9, 2030. Click each year to expand the full breakdown.</p>
+  </div>
+
+  <div class="timeline-wrap reveal">
+    <div class="timeline-spine"></div>
+
+    <!-- 2026 -->
+    <div class="tl-entry">
+      <div class="tl-node active"></div>
+      <div class="tl-card" onclick="toggleTL(this)">
+        <div class="tl-card-header">
+          <span class="tl-year-badge">2026 — NOW</span>
+          <span class="tl-toggle">+</span>
+        </div>
+        <div class="tl-title-row">
+          <div class="tl-main-title">The Launch</div>
+          <div class="tl-theme">First blood. Zero to income. Legal foundation in Georgia.</div>
+        </div>
+        <div class="tl-body">
+          <ul class="tl-points">
+            <li>Land in Georgia and get legally established within weeks, not months. Fulcrum Motors IE registration is Day 1.</li>
+            <li>Execute your first deal before you feel fully ready. The first transaction breaks the psychological seal.</li>
+            <li>Jupiter currently transits in a position that favors new beginnings in foreign environments. This is a genuine cosmic green light.</li>
+            <li>Ninth Protocol: get the lawyer review done. Activate the entity. It is already registered — it just needs to function.</li>
+            <li>Build the daily discipline your chart requires. Capricorn rising rewards relentless consistency, not sporadic bursts.</li>
+            <li>Protect the relationship. Moving together is a strategic strength, not a complication.</li>
+          </ul>
+          <div class="tl-risk-box"><strong>Risk:</strong> Over-preparation. Your Virgo Mercury loves to perfect the plan. Your 8th house Mars needs to be in motion.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2027 -->
+    <div class="tl-entry">
+      <div class="tl-node test"></div>
+      <div class="tl-card" onclick="toggleTL(this)">
+        <div class="tl-card-header">
+          <span class="tl-year-badge test">2027 — The Test</span>
+          <span class="tl-toggle">+</span>
+        </div>
+        <div class="tl-title-row">
+          <div class="tl-main-title">Survive &amp; Hold</div>
+          <div class="tl-theme">The year that separates those who make it from those who almost did.</div>
+        </div>
+        <div class="tl-body">
+          <ul class="tl-points">
+            <li>Something you have built will face serious resistance or need complete restructuring. This is examination, not failure.</li>
+            <li>The gap between where you are and the 2030 target will feel enormous and possibly unrealistic.</li>
+            <li>Do not make permanent decisions from temporary pressure. Whatever collapses is meant to be rebuilt better.</li>
+            <li>Your daily systems from 2026 carry you through. Habits do not care about hard years.</li>
+            <li>Elon Musk's Tesla nearly went bankrupt in 2008. He put his last dollar in. He came out the other side. 2027 is your version of that moment.</li>
+          </ul>
+          <div class="tl-risk-box"><strong>Risk:</strong> Quitting under pressure. This is the most dangerous year of the entire roadmap. Survival is the win.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2028 -->
+    <div class="tl-entry">
+      <div class="tl-node accel"></div>
+      <div class="tl-card" onclick="toggleTL(this)">
+        <div class="tl-card-header">
+          <span class="tl-year-badge accel">2028 — Acceleration</span>
+          <span class="tl-toggle">+</span>
+        </div>
+        <div class="tl-title-row">
+          <div class="tl-main-title">The Gate Opens</div>
+          <div class="tl-theme">Jupiter activates your natal wealth signature. Deal flow multiplies.</div>
+        </div>
+        <div class="tl-body">
+          <ul class="tl-points">
+            <li>Jupiter transits into direct harmony with your 5th house Jupiter/Saturn conjunction — the single most powerful wealth indicator in your chart.</li>
+            <li>Income jumps in step changes. One deal changes the number significantly. Multiple streams operate simultaneously for the first time.</li>
+            <li>Reputation reaches a tipping point — opportunities come to you. You stop wondering if you will make it.</li>
+            <li>The right three deals are worth more than twenty mediocre ones. Deploy Virgo Mercury as a filter, not just a radar.</li>
+          </ul>
+          <div class="tl-risk-box"><strong>Risk:</strong> Chasing everything when opportunities multiply. Ruthless selectivity is the defining skill of 2028.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2029 -->
+    <div class="tl-entry">
+      <div class="tl-node"></div>
+      <div class="tl-card" onclick="toggleTL(this)">
+        <div class="tl-card-header">
+          <span class="tl-year-badge">2029 — Assembly</span>
+          <span class="tl-toggle">+</span>
+        </div>
+        <div class="tl-title-row">
+          <div class="tl-main-title">Build the Structure</div>
+          <div class="tl-theme">Balance sheet. Legal frameworks. The Falcon becomes a financial conversation.</div>
+        </div>
+        <div class="tl-body">
+          <ul class="tl-points">
+            <li>Every income stream gets formalized into a structure that generates without requiring your constant presence.</li>
+            <li>Asset accumulation becomes deliberate — you are building a balance sheet, not just a cash flow.</li>
+            <li>The Falcon 10X moves from vision board to financial model. Running actual numbers with actual people.</li>
+            <li>Your parents see the full picture. The worry transforms into pride.</li>
+          </ul>
+          <div class="tl-risk-box"><strong>Risk:</strong> Announcing the arrival before the structure is complete. Capricorn rising must hold the line until the finish.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2030 -->
+    <div class="tl-entry">
+      <div class="tl-node arrive"></div>
+      <div class="tl-card" onclick="toggleTL(this)">
+        <div class="tl-card-header">
+          <span class="tl-year-badge arrive">September 9, 2030</span>
+          <span class="tl-toggle">+</span>
+        </div>
+        <div class="tl-title-row">
+          <div class="tl-main-title">The Arrival</div>
+          <div class="tl-theme">Leo Sun claims its throne. Your 30th birthday. The Falcon 10X.</div>
+        </div>
+        <div class="tl-body">
+          <ul class="tl-points">
+            <li>Your chart at age 30 is one of culmination and arrival. The Leo Sun in the 8th house reaches its peak expression in this window.</li>
+            <li>The Saturn/Jupiter conjunction in your 5th house — delayed but massive — reaches its full expression here.</li>
+            <li>The Falcon 10X is not the destination. It is the proof of concept. What comes after 30 is the real story.</li>
+            <li>What arrives on September 9, 2030 is determined entirely by what you do between now and then.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── BUSINESSES ── -->
+<section id="businesses">
+  <div class="reveal">
+    <div class="section-label">Part III</div>
+    <h2 class="section-title">Two <em>Businesses</em></h2>
+    <div class="gold-rule"></div>
+    <p class="section-intro">Your chart didn't give you one business — it gave you two that feed each other. Both were built instinctively before you understood why.</p>
+  </div>
+
+  <div class="biz-grid reveal">
+    <div class="biz-card">
+      <div class="biz-tag np">Ninth Protocol</div>
+      <div class="biz-name">Private Advisory</div>
+      <div class="biz-sub">UHNW procurement and advisory. Estonian OÜ registered Dec 2025. Fee-only fiduciary model. The 8th house Leo in action — charging for judgment, not time.</div>
+      <div class="biz-status-row">
+        <span class="biz-status-key">Entity</span>
+        <span class="biz-status-val"><span class="status-pip pip-green"></span> Registered — Estonia OÜ</span>
+      </div>
+      <div class="biz-status-row">
+        <span class="biz-status-key">Clients</span>
+        <span class="biz-status-val"><span class="status-pip pip-red"></span> None yet</span>
+      </div>
+      <div class="biz-status-row">
+        <span class="biz-status-key">Legal Review</span>
+        <span class="biz-status-val"><span class="status-pip pip-amber"></span> Pending — urgent</span>
+      </div>
+      <div class="biz-status-row">
+        <span class="biz-status-key">Chart Basis</span>
+        <span class="biz-status-val">Leo Sun + 8th House</span>
+      </div>
+      <div class="biz-actions">
+        <div class="biz-action-title">Next Actions</div>
+        <div class="biz-action-item"><div class="biz-action-num">1</div>Engage a lawyer to review the OÜ structure and ensure personal liability protection. This unlocks the entity.</div>
+        <div class="biz-action-item"><div class="biz-action-num">2</div>Define your first service offering and minimum engagement fee. You cannot sell what is not defined.</div>
+        <div class="biz-action-item"><div class="biz-action-num">3</div>Build a short list of 10 target clients. UHNW advisory starts with relationships, not advertising.</div>
+      </div>
+    </div>
+
+    <div class="biz-card">
+      <div class="biz-tag fm">Fulcrum Motors</div>
+      <div class="biz-name">Auto Import</div>
+      <div class="biz-sub">North America to Georgia car brokerage. Zero-capital model. $300–600 per car or 5–10% landed cost. The 9th house cross-border arbitrage engine.</div>
+      <div class="biz-status-row">
+        <span class="biz-status-key">Entity</span>
+        <span class="biz-status-val"><span class="status-pip pip-amber"></span> Unregistered — Day 1 in Georgia</span>
+      </div>
+      <div class="biz-status-row">
+        <span class="biz-status-key">Website</span>
+        <span class="biz-status-val"><span class="status-pip pip-amber"></span> In progress</span>
+      </div>
+      <div class="biz-status-row">
+        <span class="biz-status-key">Legal Docs</span>
+        <span class="biz-status-val"><span class="status-pip pip-amber"></span> Being built</span>
+      </div>
+      <div class="biz-status-row">
+        <span class="biz-status-key">Chart Basis</span>
+        <span class="biz-status-val">9th House + 8th House</span>
+      </div>
+      <div class="biz-actions">
+        <div class="biz-action-title">Next Actions</div>
+        <div class="biz-action-item"><div class="biz-action-num">1</div>Register as Individual Entrepreneur (IE) at Georgian Revenue Service within first 2 weeks of arrival.</div>
+        <div class="biz-action-item"><div class="biz-action-num">2</div>Complete website and legal documents before departure. Pre-arrival momentum matters.</div>
+        <div class="biz-action-item"><div class="biz-action-num">3</div>Source your first client before full registration is complete. A deal in pipeline beats a perfect legal structure.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="synergy-card reveal">
+    <div class="synergy-title">How the two businesses feed each other</div>
+    <div class="synergy-body">Fulcrum Motors generates immediate cash flow through deal commissions — providing the income foundation while Ninth Protocol builds its slower, higher-value client base. Ninth Protocol then opens doors to UHNW clients who may also be Fulcrum Motors customers — someone managing assets internationally may also want a sourced vehicle. The two brands share a positioning: precision cross-border advisory for people who demand excellence. One handles cars. One handles everything else. Together they point to the same destination.</div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── DO THIS NOW ── -->
+<section id="now">
+  <div class="reveal">
+    <div class="section-label">Part IV</div>
+    <h2 class="section-title">Do This<br><em>Now</em></h2>
+    <div class="gold-rule"></div>
+    <p class="section-intro">The 2030 target requires 2026 execution. Every item below has a sequence — the order matters. Check them off as you complete them.</p>
+  </div>
+
+  <div class="reveal">
+    <div class="checklist-group">
+      <div class="checklist-group-title">Before leaving Toronto</div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Complete Fulcrum Motors website and all legal document templates <span class="priority-pill p-urgent">Urgent</span></div>
+          <div class="check-meta">Must be live-ready before you land in Georgia</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Engage a lawyer to review Ninth Protocol OÜ — personal liability, structure, protection <span class="priority-pill p-urgent">Urgent</span></div>
+          <div class="check-meta">Entity is registered but not legally verified — this is a vulnerability</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Open Wise Business account linked to Ninth Protocol OÜ for international invoicing <span class="priority-pill p-high">High</span></div>
+          <div class="check-meta">Enables you to receive international payments from Day 1</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Research Georgia IE registration requirements and prepare all required documents <span class="priority-pill p-high">High</span></div>
+          <div class="check-meta">Georgian Revenue Service — Individual Entrepreneur registration</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Identify and make first contact with 3 potential Fulcrum Motors clients before departure <span class="priority-pill p-high">High</span></div>
+          <div class="check-meta">Deal in pipeline before you land changes everything psychologically</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Confirm Georgia arrival date and secure accommodation for first 30 days <span class="priority-pill p-now">Now</span></div>
+          <div class="check-meta">Stable base removes uncertainty and enables focus on business execution</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-group">
+      <div class="checklist-group-title">First 30 days in Georgia</div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Register Fulcrum Motors as Individual Entrepreneur at Georgian Revenue Service <span class="priority-pill p-urgent">Day 1</span></div>
+          <div class="check-meta">1% Small Business tax rate — this is your Georgian operational entity</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Open TBC Bank or Bank of Georgia business account for local GEL operations <span class="priority-pill p-urgent">Week 1</span></div>
+          <div class="check-meta">Required for Georgian clients and local cash flow management</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Launch Fulcrum Motors website publicly and begin active outreach <span class="priority-pill p-high">Week 1</span></div>
+          <div class="check-meta">Georgian auto community, diaspora networks, social channels</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Close your first Fulcrum Motors deal — even a small one <span class="priority-pill p-high">Month 1</span></div>
+          <div class="check-meta">The first transaction breaks the seal. Size does not matter — momentum does.</div>
+        </div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">
+          <div class="check-label">Establish your daily operating routine — wake target, work blocks, review cycles <span class="priority-pill p-now">Ongoing</span></div>
+          <div class="check-meta">Capricorn rising does not reward sporadic effort. Structure is the engine.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── REFERENCE FIGURES ── -->
+<section id="figures">
+  <div class="reveal">
+    <div class="section-label">Part V</div>
+    <h2 class="section-title">Reference<br><em>Figures</em></h2>
+    <div class="gold-rule"></div>
+    <p class="section-intro">People whose chart signatures and life trajectories carry the strongest resonance with yours. Not ceilings — reference points.</p>
+  </div>
+
+  <div class="figures-grid reveal">
+    <div class="figure-card">
+      <div class="figure-name">Jay-Z</div>
+      <div class="figure-sub">Leo Sun · Capricorn Signatures · 8th House</div>
+      <div class="figure-body">Built wealth through leverage and brokerage of culture, brands, and deals. Multiple empire streams. Did not peak early — compounded over decades. Net worth exceeds $2.5 billion.</div>
+      <div class="figure-lesson">The music was never the point. The ownership was always the point.</div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-name">Bernard Arnault</div>
+      <div class="figure-sub">Capricorn Rising · 8th House Methodology</div>
+      <div class="figure-body">Built LVMH by acquiring undervalued assets and transforming them into global empires. Used other people's capital before it was truly his. Capricorn rising meant he was always underestimated.</div>
+      <div class="figure-lesson">Being underestimated is not a disadvantage. It is your greatest strategic asset.</div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-name">Elon Musk</div>
+      <div class="figure-sub">8th House Themes · Leo Ambition · Extreme Vision</div>
+      <div class="figure-body">Tesla nearly went bankrupt in 2008. He put his last dollar in. Came out the other side and became the wealthiest person on earth. His 2027 moment defined everything that followed.</div>
+      <div class="figure-lesson">The moment everything collapses is not the end of the story. It is the beginning of the real chapter.</div>
+    </div>
+    <div class="figure-card">
+      <div class="figure-name">Richard Branson</div>
+      <div class="figure-sub">9th House Dominant · International Empire</div>
+      <div class="figure-body">Each venture used the credibility of the last to fund the next. International thinking from day one. The brand became as valuable as any individual business. Virgin Atlantic — private aviation — is in his portfolio.</div>
+      <div class="figure-lesson">Your brand travels across borders better than it works in any single market.</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── PROGRESS ── -->
+<section id="progress">
+  <div class="reveal">
+    <div class="section-label">Part VI</div>
+    <h2 class="section-title">Mission<br><em>Progress</em></h2>
+    <div class="gold-rule"></div>
+    <p class="section-intro">Where things stand today — March 29, 2026. The runway ahead.</p>
+  </div>
+
+  <div class="progress-grid reveal">
+    <div class="progress-card">
+      <div class="progress-card-title">Business Readiness</div>
+      <div class="bar-row">
+        <div class="bar-label">NP Legal</div>
+        <div class="bar-track"><div class="bar-fill" style="width:0%;background:#378ADD" data-target="40"></div></div>
+        <div class="bar-pct">40%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">NP Brand</div>
+        <div class="bar-track"><div class="bar-fill" style="width:0%;background:#378ADD" data-target="65"></div></div>
+        <div class="bar-pct">65%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">FM Website</div>
+        <div class="bar-track"><div class="bar-fill" style="width:0%;background:#639922" data-target="55"></div></div>
+        <div class="bar-pct">55%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">FM Legal</div>
+        <div class="bar-track"><div class="bar-fill" style="width:0%;background:#639922" data-target="45"></div></div>
+        <div class="bar-pct">45%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">FM Entity</div>
+        <div class="bar-track"><div class="bar-fill" style="width:0%;background:#BA7517" data-target="5"></div></div>
+        <div class="bar-pct">5%</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Revenue</div>
+        <div class="bar-track"><div class="bar-fill" style="width:0%;background:#E24B4A" data-target="2"></div></div>
+        <div class="bar-pct">0%</div>
+      </div>
+    </div>
+
+    <div class="progress-card">
+      <div class="progress-card-title">Projected Income Trajectory</div>
+      <div class="income-chart">
+        <div class="income-col">
+          <div class="income-bar" style="height:0%;background:#639922" data-h="8"></div>
+          <div class="income-year-label">2026</div>
+        </div>
+        <div class="income-col">
+          <div class="income-bar" style="height:0%;background:#BA7517" data-h="15"></div>
+          <div class="income-year-label">2027</div>
+        </div>
+        <div class="income-col">
+          <div class="income-bar" style="height:0%;background:#EF9F27" data-h="45"></div>
+          <div class="income-year-label">2028</div>
+        </div>
+        <div class="income-col">
+          <div class="income-bar" style="height:0%;background:#C9A84C" data-h="72"></div>
+          <div class="income-year-label">2029</div>
+        </div>
+        <div class="income-col">
+          <div class="income-bar" style="height:0%;background:linear-gradient(to top,#639922,#EF9F27)" data-h="95"></div>
+          <div class="income-year-label">2030</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="falcon-section reveal">
+    <div class="falcon-label">Falcon 10X Mission — September 9, 2030</div>
+    <div class="falcon-track">
+      <div class="falcon-fill" id="falconFill"></div>
+    </div>
+    <div class="falcon-endpoints">
+      <span class="falcon-endpoint">Mar 29, 2026 — Today</span>
+      <span class="falcon-endpoint">Sep 9, 2030 — Target</span>
+    </div>
+    <div style="margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold);opacity:0.7;">
+      ~3% of journey elapsed &nbsp;·&nbsp; 4 years 5 months 11 days remaining
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">Falcon 10X</div>
+  <div class="footer-quote">"The tiredness is the weight of the cocoon. You are about to use it to fly."</div>
+  <div class="footer-meta">September 9, 2000 &nbsp;·&nbsp; Sidereal Chart Analysis &nbsp;·&nbsp; Prepared March 2026 &nbsp;·&nbsp; Confidential</div>
+</footer>
+
+<script>
+// ── STARS ──────────────────────────────────────────────────────────────────
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 80; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*2+1}px;height:${Math.random()*2+1}px;--d:${Math.random()*4+2}s;--delay:${Math.random()*4}s`;
+  starsEl.appendChild(s);
+}
+
+// ── COUNTDOWN ─────────────────────────────────────────────────────────────
+function updateCountdown() {
+  const target = new Date('2030-09-09T00:00:00');
+  const now = new Date();
+  const diff = target - now;
+  if (diff <= 0) return;
+
+  const totalDays = Math.floor(diff / 86400000);
+  const hours     = Math.floor((diff % 86400000) / 3600000);
+  const mins      = Math.floor((diff % 3600000)  / 60000);
+  const secs      = Math.floor((diff % 60000)    / 1000);
+  const years     = Math.floor(totalDays / 365);
+  const months    = Math.floor((totalDays % 365) / 30);
+  const days      = totalDays % 30;
+
+  const set = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = String(v).padStart(2,'0'); };
+  set('cdY', years); set('cdMo', months); set('cdD', days);
+  set('cdH', hours); set('cdM', mins);    set('cdS', secs);
+  set('heroYears', years); set('heroMonths', months); set('heroDays', days);
+
+  const navEl = document.getElementById('navCountdown');
+  if (navEl) navEl.textContent = `${years}Y ${months}M ${days}D`;
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ── READING BAR ────────────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const bar = document.getElementById('readingBar');
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  if (bar) bar.style.width = pct + '%';
+});
+
+// ── TIMELINE TOGGLE ────────────────────────────────────────────────────────
+function toggleTL(card) {
+  card.classList.toggle('open');
+}
+
+// ── CHECKLIST ─────────────────────────────────────────────────────────────
+function toggleCheck(item) {
+  item.classList.toggle('done');
+  const box = item.querySelector('.check-box');
+  if (box) box.classList.toggle('checked');
+}
+
+// ── SCROLL REVEAL ──────────────────────────────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal, .tl-entry');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Animate bars
+      e.target.querySelectorAll('.bar-fill[data-target]').forEach(b => {
+        setTimeout(() => { b.style.width = b.dataset.target + '%'; }, 200);
+      });
+      // Animate income bars
+      e.target.querySelectorAll('.income-bar[data-h]').forEach(b => {
+        setTimeout(() => { b.style.height = b.dataset.h + '%'; }, 200);
+      });
+    }
+  });
+}, { threshold: 0.15 });
+
+revealEls.forEach(el => observer.observe(el));
+
+// Falcon fill
+setTimeout(() => {
+  const ff = document.getElementById('falconFill');
+  if (ff) ff.style.width = '3%';
+}, 1000);
+</script>
+</body>
+</html>
